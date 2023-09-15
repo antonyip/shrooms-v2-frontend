@@ -59,6 +59,8 @@ function App() {
 
         if (res.data.ERROR) {
           console.log("ERROR");
+          setQueryId("Missing/Wrong Token?");
+          setQueryStatus("Missing/Wrong Token?");
           return;
         }
 
@@ -80,6 +82,10 @@ function App() {
       )
       .then(function (res) {
         console.log(res.data);
+        if (!res.data.result?.queryRun?.state){
+          setQueryStatus("No such query...");
+          return  
+        }
         setQueryStatus(res.data.result.queryRun.state);
       })
       .catch(function (error) {
@@ -91,6 +97,21 @@ function App() {
     axios
       .post(
         "https://flipside-api.antonyip.com/getQueryResults",
+        {
+          queryId: queryId,
+          token: token,
+        },
+        { headers: { "Content-Type": "application/json" } }
+      )
+      .then(function (res) {
+        console.log(res.data);
+      });
+  };
+
+  const cancelQuery = (evt) => {
+    axios
+      .post(
+        "https://flipside-api.antonyip.com/cancelQuery",
         {
           queryId: queryId,
           token: token,
@@ -255,6 +276,36 @@ function App() {
             }}
           >
             Get Query Results
+          </Button>
+        </Form>
+      </div>
+      <br />
+      <div className="Queries">
+        <Form>
+          <Form.Group
+            className="mb-3"
+            controlId="exampleForm6.ControlTextarea1"
+          >
+            <Form.Label type="text" id="ant-flipside-api-query-text">
+              cancelQuery
+            </Form.Label>
+            <Form.Control
+              type="textarea"
+              rows={6}
+              value={queryId}
+              onChange={(evt) => {
+                setQueryId(evt.target.value);
+              }}
+            />
+          </Form.Group>
+          <Button
+            variant="primary"
+            type="button"
+            onClick={(evt) => {
+              cancelQuery(evt);
+            }}
+          >
+            Cancel Query
           </Button>
         </Form>
       </div>
