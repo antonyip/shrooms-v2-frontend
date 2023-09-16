@@ -1,5 +1,6 @@
 # MainPage
-https://flipsidecrypto.xyz/account/api-keys
+- https://flipsidecrypto.xyz/account/api-keys
+
 # to run
-npm i
-npm start
+1. npm i
+2. npm start
