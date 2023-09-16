@@ -61,7 +61,9 @@ function User() {
                 setPassword(evt.target.value);
               }}
             />
-            <Button
+          </Form.Group>
+          <Col xs={2} className="mb-3">
+          <Button
               variant="primary"
               type="button"
               onClick={(evt) => {
@@ -70,11 +72,11 @@ function User() {
             >
               Get ant-flipside-api-token
             </Button>
-          </Form.Group>
+          </Col>
           <Form.Group
             as={Col}
             className="mb-3"
-            xs={6}
+            xs={4}
             controlId="exampleForm2.ControlTextarea1"
           >
             <Form.Label type="password">ant-flipside-api-token</Form.Label>
