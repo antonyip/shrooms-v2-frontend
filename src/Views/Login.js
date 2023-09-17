@@ -93,6 +93,7 @@ function Login() {
   };
 
   const cancelQuery = (evt) => {
+    setQueryStatus("Query Canceled.. Check Flipside's API to finalize.");
     axios
       .post(
         "https://flipside-api.antonyip.com/cancelQuery",
